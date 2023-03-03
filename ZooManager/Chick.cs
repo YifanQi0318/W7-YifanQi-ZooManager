@@ -23,8 +23,8 @@ namespace ZooManager
         {
             base.Activate();
             Console.WriteLine("I am a chick, cheep cheep");
-            ChickRun();
-            /*Found a bug, it seems that the chick detects the global variable TurnCounter instead of his own "maturity time",*/
+            ChickFlee();
+            /*Found a bug, it seems that the chick detects the global variable TurnCounter instead of his own "maturity time"*/
             if (TurnCounter == 3)//Mature Method, use the turn counter to decide if it will change to raptor
             {
                 Mature(this); //When turn arrived 3, call this function
@@ -37,7 +37,7 @@ namespace ZooManager
 
         }
 
-        public void ChickRun()//Chick's function
+        public void ChickFlee()//Chick's function
         {
             if (Game.Seek(location.x, location.y, Direction.up, "cat"))
             {

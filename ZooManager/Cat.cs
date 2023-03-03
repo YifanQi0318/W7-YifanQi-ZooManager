@@ -39,7 +39,7 @@ namespace ZooManager
          */
 
 
-        public void CatHunt()//Now cat hunts both Mouse and Chick, Although way is rough
+        /*public void CatHunt()//Now cat hunts both Mouse and Chick, Although way is rough
         {
             if (Game.Seek(location.x, location.y, Direction.up, "mouse"))
             {
@@ -93,7 +93,7 @@ namespace ZooManager
             {
                 if (Game.Retreat(this, Direction.left)) return;
             }
-        }
+        }*/
     }
 }
 

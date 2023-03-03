@@ -1,7 +1,7 @@
 ﻿using System;
 namespace ZooManager
 {
-
+    //Part2: Modify ZooManager
     public class Animal
     {
         public string emoji;
