@@ -34,6 +34,10 @@ much as possible.
             Hunt();
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
+            if (TurnCounter > 3)
+            {
+                Death(this);
+            }
         }
 
         public void Hunt()//The raptor hunts for cat and mouse
@@ -71,6 +75,14 @@ much as possible.
             {
                 Game.Attack(this, Direction.right);
             }
+        }
+
+        public void Death(Animal raptor)
+        {
+            int x = raptor.location.x;
+            int y = raptor.location.y;
+
+            Game.animalZones[location.y][location.x].occupant = new Skull("DeathBody");
         }
 
 

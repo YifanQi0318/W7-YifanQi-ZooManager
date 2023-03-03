@@ -21,6 +21,10 @@ namespace ZooManager
             CatHunt();
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
+            if ( TurnCounter > 3 )
+            {
+                Death(this);
+            }
         }
 
         /* Note that our cat is currently not very clever about its hunting.
@@ -39,7 +43,7 @@ namespace ZooManager
          */
 
 
-        /*public void CatHunt()//Now cat hunts both Mouse and Chick, Although way is rough
+        public void CatHunt()//Now cat hunts both Mouse and Chick, Although way is rough
         {
             if (Game.Seek(location.x, location.y, Direction.up, "mouse"))
             {
@@ -93,7 +97,15 @@ namespace ZooManager
             {
                 if (Game.Retreat(this, Direction.left)) return;
             }
-        }*/
+        }
+
+        public void Death(Animal cat)
+        {
+            int x = cat.location.x;
+            int y = cat.location.y;
+
+            Game.animalZones[location.y][location.x].occupant = new Skull("DeathBody");
+        }
     }
 }
 

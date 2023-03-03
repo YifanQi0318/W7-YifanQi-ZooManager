@@ -22,6 +22,10 @@ namespace ZooManager
             Flee();
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
+            if (TurnCounter > 3)
+            {
+                Death(this);
+            }
         }
 
         /* Note that our mouse is (so far) a teeny bit more strategic than our cat.
@@ -51,6 +55,14 @@ namespace ZooManager
             {
                 if (Game.Retreat(this, Direction.left)) return;
             }
+        }
+
+        public void Death(Animal mouse)
+        {
+            int x = mouse.location.x;
+            int y = mouse.location.y;
+
+            Game.animalZones[location.y][location.x].occupant = new Skull("DeathBody");
         }
     }
 }
