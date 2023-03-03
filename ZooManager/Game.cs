@@ -37,6 +37,7 @@ namespace ZooManager
                     rowList.Add(new Zone(x, numCellsY, null));
                 }
                 numCellsY++;
+                //distance++;
                 if (d == Direction.down) animalZones.Add(rowList);
                 // if (d == Direction.up) animalZones.Insert(0, rowList);
             }
@@ -50,6 +51,7 @@ namespace ZooManager
                     if (d == Direction.right) rowList.Add(new Zone(numCellsX, y, null));
                 }
                 numCellsX++;
+                //distance++;
             }
         }
 
@@ -110,31 +112,47 @@ namespace ZooManager
                         if (zone.occupant != null && zone.occupant.reactionTime == r)
                         {
                             zone.occupant.Activate();
+                           
                         }
                     }
                 }
             }
         }
 
-        static public bool Seek(int x, int y, Direction d, string target)
+
+        /*[Summary]
+         * Modify or rewrite the Seek method so that it takes an additional parameter distance and 
+        checks that many squares (Zone) in the specified direction, one at a time (stopping early if it 
+        reaches the edge of the grid of course). Instead of a bool, the method should return an int that 
+        reflects the number of squares to the nearest target, or if the specified target was not found. 
+        Modify your subclasses of Animal to use the modified method
+         */
+
+        //Adjust:
+        static public bool Seek(int x, int y, Direction d, string target, int distance=2)//Add distance to check
         {
-            switch (d)
+            for (int i = 0; i < distance; i++)
             {
-                case Direction.up:
-                    y--;
-                    break;
-                case Direction.down:
-                    y++;
-                    break;
-                case Direction.left:
-                    x--;
-                    break;
-                case Direction.right:
-                    x++;
-                    break;
+                switch (d)
+                {
+                    case Direction.up:
+                        y--;
+                        break;
+                    case Direction.down:
+                        y++;
+                        break;
+                    case Direction.left:
+                        x--;
+                        break;
+                    case Direction.right:
+                        x++;
+                        break;
+                }
             }
-            if (y < 0 || x < 0 || y > numCellsY - 1 || x > numCellsX - 1) return false;
-            if (animalZones[y][x].occupant == null) return false;
+            if (y < 0 || x < 0 || y > numCellsY - 1 || x > numCellsX - 1) 
+                return false;//target not found
+            if (animalZones[y][x].occupant == null) 
+                return false;//keep looking
             if (animalZones[y][x].occupant.species == target)
             {
                 return true;

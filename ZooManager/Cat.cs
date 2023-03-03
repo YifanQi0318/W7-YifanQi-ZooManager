@@ -17,8 +17,8 @@ namespace ZooManager
         {
             base.Activate();
             Console.WriteLine("I am a cat. Meow.");
+            CatFlee();//Adjust its sequence
             CatHunt();
-            CatFlee();
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
         }
@@ -31,7 +31,15 @@ namespace ZooManager
          * cat also has a predator to avoid, since the cat may not want to run in
          * to a square that sets it up to be attacked!
          */
-        public void CatHunt()
+
+
+        /*[Summary]
+         * e/ Modify the Cat so that it hunts both Mouse and Chick entites and avoids Raptor en??es 
+         (requires c) and priori?zes avoiding over hun?ng 
+         */
+
+
+        public void CatHunt()//Now cat hunts both Mouse and Chick, Although way is rough
         {
             if (Game.Seek(location.x, location.y, Direction.up, "mouse"))
             {
