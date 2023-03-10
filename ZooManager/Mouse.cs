@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace ZooManager
 {
     public class Mouse : Animal
@@ -9,6 +11,7 @@ namespace ZooManager
             species = "mouse";
             this.name = name; // "this" to clarify instance vs. method parameter
             reactionTime = new Random().Next(1, 4); // reaction time of 1 (fast) to 3
+            Predator = new List<string>() { "cat" };
             TurnCounter= 0;
             /* Note that Mouse reactionTime range is smaller than Cat reactionTime,
              * so mice are more likely to react to their surroundings faster than cats!
@@ -19,7 +22,7 @@ namespace ZooManager
         {
             base.Activate();
             Console.WriteLine("I am a mouse. Squeak.");
-            Flee();
+            Flee(Predator);
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
             if (TurnCounter > 3)
@@ -37,25 +40,6 @@ namespace ZooManager
          * foundation here for intelligence, since we actually check whether our escape
          * was succcesful -- unlike our cats, who just assume they'll get their prey!
          */
-        public void Flee()
-        {
-            if (Game.Seek(location.x, location.y, Direction.up, "cat"))
-            {
-                if (Game.Retreat(this, Direction.down)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.down, "cat"))
-            {
-                if (Game.Retreat(this, Direction.up)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.left, "cat"))
-            {
-                if (Game.Retreat(this, Direction.right)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.right, "cat"))
-            {
-                if (Game.Retreat(this, Direction.left)) return;
-            }
-        }
 
         public void Death(Animal mouse)
         {

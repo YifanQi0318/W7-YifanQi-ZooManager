@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ZooManager
@@ -15,6 +16,7 @@ namespace ZooManager
             species = "chick";
             this.name = name;
             reactionTime = new Random().Next(6, 10);
+            Predator = new List<string>() { "cat" };
             TurnCounter= 0;
            
         }
@@ -23,7 +25,7 @@ namespace ZooManager
         {
             base.Activate();
             Console.WriteLine("I am a chick, cheep cheep");
-            ChickFlee();
+            Flee(Predator);
             /*Found a bug, it seems that the chick detects the global variable TurnCounter instead of his own "maturity time"*/
             if (TurnCounter == 3)//Mature Method, use the turn counter to decide if it will change to raptor
             {
@@ -37,25 +39,6 @@ namespace ZooManager
 
         }
 
-        public void ChickFlee()//Chick's function
-        {
-            if (Game.Seek(location.x, location.y, Direction.up, "cat"))
-            {
-                if (Game.Retreat(this, Direction.down)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.down, "cat"))
-            {
-                if (Game.Retreat(this, Direction.up)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.left, "cat"))
-            {
-                if (Game.Retreat(this, Direction.right)) return;
-            }
-            if (Game.Seek(location.x, location.y, Direction.right, "cat"))
-            {
-                if (Game.Retreat(this, Direction.left)) return;
-            }
-        }
 
         /*[Summary]
          Add a new method Mature to class Chick (requires c). Aler a Chick has been on the board 

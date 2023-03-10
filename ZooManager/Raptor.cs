@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZooManager
 {
@@ -24,6 +25,7 @@ much as possible.
             species = "raptor";
             this.name = name;
             reactionTime = 1; // reaction time 1 
+            Prey = new List<string>() { "cat", "mouse"}; 
             TurnCounter= 0;
         }
 
@@ -31,7 +33,7 @@ much as possible.
         {
             base.Activate();
             Console.WriteLine("I am a raptor, I can catch the sky.");
-            Hunt();
+            Hunt(Prey);
             TurnCounter++;
             Console.WriteLine($"It's{species}'s turn {TurnCounter}");
             if (TurnCounter > 3)
@@ -40,42 +42,7 @@ much as possible.
             }
         }
 
-        public void Hunt()//The raptor hunts for cat and mouse
-        {
-            if (Game.Seek(location.x, location.y, Direction.up, "cat"))
-            {
-                Game.Attack(this, Direction.up);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.down, "cat"))
-            {
-                Game.Attack(this, Direction.down);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.left, "cat"))
-            {
-                Game.Attack(this, Direction.left);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.right, "cat"))
-            {
-                Game.Attack(this, Direction.right);
-            }
-            /*Let Raptor can catch the mouse*/
-            else if (Game.Seek(location.x, location.y, Direction.up, "mouse"))
-            {
-                Game.Attack(this, Direction.up);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.down, "mouse"))
-            {
-                Game.Attack(this, Direction.down);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.left, "mouse"))
-            {
-                Game.Attack(this, Direction.left);
-            }
-            else if (Game.Seek(location.x, location.y, Direction.right, "mouse"))
-            {
-                Game.Attack(this, Direction.right);
-            }
-        }
+       
 
         public void Death(Animal raptor)
         {
