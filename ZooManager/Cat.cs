@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZooManager
 {
@@ -8,6 +9,15 @@ namespace ZooManager
         {
             emoji = "🐱";
             species = "cat";
+            Predator = new List<string>() 
+            {
+                "raptor"
+            };
+            Prey = new List<string>()
+            {
+                "mouse",
+                "chick"
+            };
             this.name = name;
             reactionTime = new Random().Next(1, 6); // reaction time 1 (fast) to 5 (medium)
             TurnCounter= 0;
